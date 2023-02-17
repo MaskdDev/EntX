@@ -1,4 +1,4 @@
-import utils
+from . import utils
 
 class Client:
     def __init__(self, password: str):

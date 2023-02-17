@@ -1,6 +1,6 @@
 import json
-from utils import apply_map
-from __init__ import Client
+from .utils import apply_map
+from .__init__ import Client
 
 class JSONClient(Client):
     def __init__(self, password: str):

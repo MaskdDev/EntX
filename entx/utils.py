@@ -1,7 +1,7 @@
 import hashlib
 import random
 
-encryption_style = "aYb1AcX8dWe4fB!IUg-L0hiCjTk2Hl&V_m7@nDMo^pJ)5qE#Nr>+st9$FR*Q=ZuP<Kv(%O3wGxS6yz"
+encryption_style = "aYb1AcX8dWe4fB!IUg-L0hiCjTk2Hl&V_m7@nDMo^pJ)5q E#Nr>+st9$FR*Q=ZuP<Kv(%O3wGxS6yz"
 
 def generatePasswordSeed(password: str):
     # Initialise variables
@@ -59,7 +59,7 @@ def encryptkit(to_encrypt: str, password: str):
     for char in to_encrypt:
         if char in encryption:
             char_position = encryption.find(char)
-            new_char_position = (char_position + len(password) * ord(encryption[len(password)]) + index) % 78
+            new_char_position = (char_position + len(password) * ord(encryption[len(password)]) + index) % 79
             encrypted += encryption[new_char_position]
         else:
             encrypted += char
@@ -80,7 +80,7 @@ def decryptkit(to_decrypt: str, password: str):
     for char in to_decrypt:
         if char in encryption:
             char_position = encryption.find(char)
-            old_char_position = (char_position - len(password) * ord(encryption[len(password)]) - index) % 78
+            old_char_position = (char_position - len(password) * ord(encryption[len(password)]) - index) % 79
             decrypted += encryption[old_char_position]
         else:
             decrypted += char
@@ -88,3 +88,20 @@ def decryptkit(to_decrypt: str, password: str):
             
     # Return final result
     return decrypted
+
+def apply_map(obj: dict, func):
+    if isinstance(obj, dict):
+        new_obj = {}
+        for key in obj:
+            if isinstance(obj[key], dict):
+                new_obj[func(key)] = apply_map(obj[key], func)
+            elif isinstance(obj[key], str) or isinstance(obj[key], int):
+                new_obj[func(key)] = func(obj[key])
+            elif isinstance(obj[key], list):
+                new_obj[func(key)] = [func(item) for item in obj[key]]
+                
+        # Return finished dictionary
+        return new_obj
+    
+    else:
+        raise TypeError("obj must be an instance of dict.")

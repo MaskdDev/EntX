@@ -89,3 +89,52 @@ client = JSONClient(os.environ["password"])
 with open("demo.json", "r") as input_file:
     decrypted_dictionary = client.load(input_file)
 ```
+
+### EntX Storage Exceptions:
+
+#### entx.errors.InvalidPasswordException
+Raised when the password provided for a client file is invalid. Often raised when trying to load from a file with an incorrect password.
+
+## EntX Users
+
+### EntX User Management System
+As of Version 3.0.0, EntX now comes with the users module to manager users and their data. All user files are encrypted using the user password, and can be stored in any relative directory. 
+
+#### How to create a new user in a "users" folder:
+```
+from entx.users import User
+user = User.new_user("username", "password", "users")
+```
+
+#### How to log in to an existing user in a "users" folder:
+```
+from entx.users import User
+user = User.login("username", "password", "users")
+```
+
+#### How to access a user's data object from a User object:
+```
+from entx.users import User
+user = User.login("username", "password", "users")
+data = user.obj
+print(data)
+```
+
+#### How to add a field to a user's data object and save it to the user's file:
+```
+from entx.users import User
+user = User.login("username", "password", "users")
+user.obj["new_field"] = "field contents"
+user.update()
+```
+
+### User Management Exceptions:
+
+#### entx.errors.UserAlreadyExists
+Raised when you are trying to create a new user in a directory where a user with that username already exists.
+
+#### entx.errors.InvalidUser
+Raised when you are trying to log in to a user that doesn't exist.'
+
+#### entx.errors.InvalidPasswordException
+Raised when the password provided for a user is invalid.

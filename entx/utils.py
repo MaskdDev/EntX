@@ -39,11 +39,6 @@ def generatePasswordEncryption(password: str):
     random.shuffle(encryption_style_split)
     custom_encryption_style = "".join(encryption_style_split)
     
-    # Shift password characters
-    for char in password:
-        if char in custom_encryption_style:
-            custom_encryption_style = custom_encryption_style.replace(char, "") + char
-    
     # Return custom styling
     return custom_encryption_style
 

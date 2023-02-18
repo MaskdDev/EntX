@@ -1,7 +1,7 @@
 import hashlib
 import random
 
-encryption_style = "aYb1AcX8dWe4fB!IUg-L0hiCjTk2Hl&V_m7@nDMo^pJ)5q E#Nr>+st9$FR*Q=ZuP<Kv(%O3wGxS6yz"
+encryption_style = "aYb1AcX8dWe4fB!IUg-L0{hiCjTk2Hl&V_m7@nDMo^pJ)5q E#Nr>+st9$FR*Q=ZuP<Kv(%O3w}GxS6yz"
 
 def generatePasswordSeed(password: str):
     # Initialise variables
@@ -59,7 +59,7 @@ def encryptkit(to_encrypt: str, password: str):
     for char in to_encrypt:
         if char in encryption:
             char_position = encryption.find(char)
-            new_char_position = (char_position + len(password) * ord(encryption[len(password)]) + index) % 79
+            new_char_position = (char_position + len(password) * ord(encryption[len(password)]) + index) % 81
             encrypted += encryption[new_char_position]
         else:
             encrypted += char
@@ -80,7 +80,7 @@ def decryptkit(to_decrypt: str, password: str):
     for char in to_decrypt:
         if char in encryption:
             char_position = encryption.find(char)
-            old_char_position = (char_position - len(password) * ord(encryption[len(password)]) - index) % 79
+            old_char_position = (char_position - len(password) * ord(encryption[len(password)]) - index) % 81
             decrypted += encryption[old_char_position]
         else:
             decrypted += char

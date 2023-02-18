@@ -35,6 +35,12 @@ encrypted = client.decrypt(to_decrypt)
 ### JSON
 EntX supports JSON reading and writing, allowing you to store and read dictionaries in the .json format, automatically encrypting and decrypting the data with the password provided.
 
+To store values as a JSON with encryption only applying to the values, pass in the keyword parameter `encrypt_output = False` to the dumps and dump functions. If this is not passed or set to `True`, the json will be encrypted before writing and only readable using the EntX JSONClient.
+
+To read values from a JSON with encryption only applying to the values, pass in the keyword parameter `encrypted_input = False` to the load and loads functions. If this is not passed or set to `True`, the client will attempt to decrypt the json before converting it to an object, throwing an error if the json is not encrypted or the password provided is incorrect.
+
+It is recommended that you encrypt your output json to increase the strength of the output's encryption.
+
 #### How to create a JSON client with a password stored in an environment variable:
 ```
 import os

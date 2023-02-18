@@ -1,6 +1,7 @@
 # EntX - The Python Encryption Library
 
 ## EntX Encryption and Decryption
+Note: EntX Encryption will store all keys and values as strings. If you plan on running operations on integers/floars in your data, convert them with int() or float() before use.
 
 ### How to create an encryption client with password stored in an environment variable:
 ```

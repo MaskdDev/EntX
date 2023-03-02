@@ -90,7 +90,7 @@ def apply_map(obj: dict, func):
         for key in obj:
             if isinstance(obj[key], dict):
                 new_obj[func(key)] = apply_map(obj[key], func)
-            elif isinstance(obj[key], str) or isinstance(obj[key], int):
+            elif isinstance(obj[key], str) or isinstance(obj[key], int) or isinstance(obj[key], float):
                 new_obj[func(key)] = func(obj[key])
             elif isinstance(obj[key], list):
                 new_obj[func(key)] = [func(item) for item in obj[key]]

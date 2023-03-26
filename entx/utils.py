@@ -54,7 +54,7 @@ def encryptkit(to_encrypt: str, password: str):
     for char in str(to_encrypt):
         if char in encryption:
             char_position = encryption.find(char)
-            new_char_position = (char_position + len(password) * ord(encryption[len(password)]) + index) % 87
+            new_char_position = (char_position + len(password) * ord(password[len(password) - 1]) + index) % 87
             encrypted += encryption[new_char_position]
         else:
             encrypted += char
@@ -75,7 +75,7 @@ def decryptkit(to_decrypt: str, password: str):
     for char in str(to_decrypt):
         if char in encryption:
             char_position = encryption.find(char)
-            old_char_position = (char_position - len(password) * ord(encryption[len(password)]) - index) % 87
+            old_char_position = (char_position - len(password) * ord(password[len(password) - 1]) - index) % 87
             decrypted += encryption[old_char_position]
         else:
             decrypted += char

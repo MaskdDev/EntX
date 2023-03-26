@@ -1,7 +1,10 @@
 # EntX - The Python Encryption Library
 
+## Breaking Changes as of Version 3.1.0:
+The Style of Encryption has been changed in version 3.1.0, due to a bug present in the previous version. If you have data encrypted with versions <= 3.1.0, you may need to re-encrypt them to use the new versions of the library. This change does not affect new users, and we apologise for the inconvenience caused.
+
 ## EntX Encryption and Decryption
-Note: EntX Encryption will store all keys and values as strings. If you plan on running operations on integers/floars in your data, convert them with int() or float() before use.
+Note: EntX Encryption will store all keys and values as strings. If you plan on running operations on integers/floats in your data, convert them with int() or float() before use.
 
 ### How to create an encryption client with password stored in an environment variable:
 ```

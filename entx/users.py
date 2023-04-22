@@ -2,6 +2,7 @@ from .storage import JSONClient
 from .errors import InvalidPasswordException, UserAlreadyExists, InvalidUser
 import os
 
+
 class User:
     def __init__(self, username: str, password: str, user_dir: str = None):
         self.username = username
@@ -12,22 +13,21 @@ class User:
             self.user_dir = f"{username}.json"
         self.client = JSONClient(password)
         self.obj = {}
-    
+
     @classmethod
     def new_user(cls, username: str, password: str, user_dir: str = None):
         if f"{username}.json" not in os.listdir(user_dir):
             user = cls(username, password, user_dir)
-            user_obj = {
-                "username": user.username,
-                "data": user.obj
-            }
+            user_obj = {"username": user.username, "data": user.obj}
             with open(user.user_dir, "w") as user_file:
                 user.client.dump(user_obj, user_file)
             return user
         else:
-            raise UserAlreadyExists(f"A user named {username} already exists in this directory.")
-    
-    @classmethod   
+            raise UserAlreadyExists(
+                f"A user named {username} already exists in this directory."
+            )
+
+    @classmethod
     def login(cls, username: str, password: str, user_dir: str = None):
         if f"{username}.json" in os.listdir(user_dir):
             user = cls(username, password, user_dir)
@@ -41,14 +41,11 @@ class User:
                 else:
                     raise InvalidPasswordException("Incorrect password provided.")
         else:
-            raise InvalidUser(f"A user named {username} does not exist in this directory.")
-        
+            raise InvalidUser(
+                f"A user named {username} does not exist in this directory."
+            )
+
     def update(self):
-        user_obj = {
-            "username": self.username,
-            "data": self.obj
-        }
+        user_obj = {"username": self.username, "data": self.obj}
         with open(self.user_dir, "w") as user_file:
             self.client.dump(user_obj, user_file)
-    
-    
